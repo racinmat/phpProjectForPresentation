@@ -34,17 +34,6 @@ include_once 'header.php';
     </td>
   </tr>
   <tr>
-    <th>
-      <label for="passwordAgain">Zadejte heslo znovu: </label>
-    </th>
-    <td>
-      <input type="password" name="passwordAgain" id="passwordAgain" required>
-    <?php if (isset($_GET["wrongPassword"])) {
-        echo("Hesla se musí shodovat.");
-    } ?>
-    </td>
-  </tr>
-  <tr>
     <td>
       <input type="submit" name="send" value="Zaregistrovat se">
     </td>
@@ -56,12 +45,7 @@ if (isset($_POST["send"])) {
     $login = $_POST["login"];
     $age = $_POST["age"];
     $password = $_POST["password"];
-    $passwordAgain = $_POST["passwordAgain"];
-    if ($password != $passwordAgain) {
-        header("Location: register.php?wrongPassword=".true);
-        die();
-    }
-    else if($age < 18) {
+    if($age < 18) {
         $text = "Musíte být plnoletý.";
         header("Location: register.php?wrongAge=".true);
         die();
@@ -70,7 +54,7 @@ if (isset($_POST["send"])) {
         header("Location: register.php?wrongName=".true);
         die();
     } else {
-        header("Location: registered.php?login=".$logiin);
+        header("Location: registered.php?login=".$login);
         die();
     }
 }
